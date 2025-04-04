@@ -34,7 +34,8 @@ const MapView = () => {
       console.error(`Error fetching coordinates for ${address}:`, error);
     }
     return null;
-  }, [apiKey]);
+  }, []); // Removed apiKey from the dependencies
+  
 
   const addMarkers = useCallback(async (map) => {
     setIsLoadingMarkers(true);
