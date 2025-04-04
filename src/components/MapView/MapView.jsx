@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, AlertTriangle, Shield, Loader } from 'lucide-react';
@@ -19,7 +19,7 @@ const MapView = () => {
     { address: 'Valavoor - Chakkampuzha Rd, Valavoor, Nechipuzhoor, Kerala,India', name: 'Kottayam', severity: 'High' },
   ];
 
-  const getCoordinates = async (address) => {
+  const getCoordinates = useCallback(async (address) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       address
     )}&key=${apiKey}`;
@@ -34,9 +34,9 @@ const MapView = () => {
       console.error(`Error fetching coordinates for ${address}:`, error);
     }
     return null;
-  };
+  }, [apiKey]);
 
-  const addMarkers = async (map) => {
+  const addMarkers = useCallback(async (map) => {
     setIsLoadingMarkers(true);
     try {
       for (const hotspot of hotspots) {
@@ -74,7 +74,7 @@ const MapView = () => {
     } finally {
       setIsLoadingMarkers(false);
     }
-  };
+  }, [getCoordinates, hotspots]);
 
   // Initialize map after component mounts
   useEffect(() => {
@@ -106,7 +106,7 @@ const MapView = () => {
     if (isMapReady && mapInstanceRef.current) {
       addMarkers(mapInstanceRef.current);
     }
-  }, [isMapReady, hotspots, apiKey]);  // Added dependencies
+  }, [isMapReady, addMarkers]); 
 
   const getTotalsByZoneType = () => {
     const counts = {
