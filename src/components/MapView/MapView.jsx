@@ -1,7 +1,17 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, AlertTriangle, Shield, Loader } from 'lucide-react';
+
+// Move hotspots array outside the component to prevent unnecessary re-renders
+const HOTSPOTS = [
+  { address: 'New Delhi, India', name: 'Delhi', severity: 'High' },
+  { address: 'Jaipur, Rajasthan, India', name: 'Jaipur', severity: 'Moderate' },
+  { address: 'Mumbai, Maharashtra, India', name: 'Mumbai', severity: 'Low' },
+  { address: 'Kolkata, West Bengal, India', name: 'Kolkata', severity: 'High' },
+  { address: 'Chennai, Tamil Nadu, India', name: 'Chennai', severity: 'Moderate' },
+  { address: 'Valavoor - Chakkampuzha Rd, Valavoor, Nechipuzhoor, Kerala,India', name: 'Kottayam', severity: 'High' },
+];
 
 const MapView = () => {
   const mapRef = useRef(null);
@@ -9,15 +19,9 @@ const MapView = () => {
   const [isMapReady, setIsMapReady] = useState(false);
   const [isLoadingMarkers, setIsLoadingMarkers] = useState(false);
   const apiKey = 'AIzaSyCPcMPsIjKrQoi8nP1KJ-8PAp-aavTKB4U';
-  
-  const hotspots = [
-    { address: 'New Delhi, India', name: 'Delhi', severity: 'High' },
-    { address: 'Jaipur, Rajasthan, India', name: 'Jaipur', severity: 'Moderate' },
-    { address: 'Mumbai, Maharashtra, India', name: 'Mumbai', severity: 'Low' },
-    { address: 'Kolkata, West Bengal, India', name: 'Kolkata', severity: 'High' },
-    { address: 'Chennai, Tamil Nadu, India', name: 'Chennai', severity: 'Moderate' },
-    { address: 'Valavoor - Chakkampuzha Rd, Valavoor, Nechipuzhoor, Kerala,India', name: 'Kottayam', severity: 'High' },
-  ];
+
+  // Wrap hotspots with useMemo to ensure stability
+  const hotspots = useMemo(() => HOTSPOTS, []);
 
   const getCoordinates = useCallback(async (address) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
@@ -34,8 +38,8 @@ const MapView = () => {
       console.error(`Error fetching coordinates for ${address}:`, error);
     }
     return null;
-  }, []); // Removed apiKey from the dependencies
-  
+  }, [apiKey]);
+
 
   const addMarkers = useCallback(async (map) => {
     setIsLoadingMarkers(true);
@@ -47,7 +51,6 @@ const MapView = () => {
             hotspot.severity === 'High' ? '#ef4444' :
             hotspot.severity === 'Moderate' ? '#f97316' : '#22c55e';
             
-          // Create marker with custom popup
           const marker = L.circle([coordinates.lat, coordinates.lng], {
             color: color,
             fillColor: color,
@@ -56,7 +59,6 @@ const MapView = () => {
             weight: 2,
           });
 
-          // Add popup with custom styling
           const popupContent = `
             <div style="font-family: system-ui, sans-serif; padding: 8px;">
               <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${hotspot.name}</div>
