@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Send, User, Bell, MessageCircle, Heart } from "lucide-react";
+import { Send, MessageCircle, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Community = () => {
