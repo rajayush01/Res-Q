@@ -36,7 +36,7 @@ const Login = () => {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [images.length]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
