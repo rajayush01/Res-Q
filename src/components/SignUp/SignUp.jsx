@@ -36,7 +36,7 @@ const Signup = () => {
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [images.length]); // Added missing dependency
 
   // Update form data state on input change
   const handleInputChange = (e) => {
