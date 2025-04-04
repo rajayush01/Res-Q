@@ -106,7 +106,7 @@ const MapView = () => {
     if (isMapReady && mapInstanceRef.current) {
       addMarkers(mapInstanceRef.current);
     }
-  }, [isMapReady]);
+  }, [isMapReady, hotspots, apiKey]);  // Added dependencies
 
   const getTotalsByZoneType = () => {
     const counts = {
@@ -120,7 +120,7 @@ const MapView = () => {
   const zoneCounts = getTotalsByZoneType();
 
   return (
-    <div className=" overflow-hidden flex flex-col">
+    <div className="overflow-hidden flex flex-col">
       <div className="flex-grow">
         {/* Header Section - Responsive Typography */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4">
