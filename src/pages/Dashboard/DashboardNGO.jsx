@@ -38,6 +38,9 @@ const DashboardNGO = () => {
 
     const navigate = useNavigate();
 
+    const toggleChartType = () => {
+        setChartType(chartType === 'line' ? 'bar' : 'line');
+    };
     // Responsive check
     useEffect(() => {
         const handleResize = () => {
@@ -168,7 +171,12 @@ const DashboardNGO = () => {
 
     const renderContent = () => {
         const tabs = {
-            overview: <Overview mockData={mockData} chartType={chartType} renderChart={renderChart} />,
+            overview: <Overview 
+            mockData={mockData} 
+            chartType={chartType} 
+            renderChart={renderChart}
+            onChartTypeChange={toggleChartType} 
+        />,
             alerts: <Alerts />,
             map: <MapView />,
             resources: <Resources />,
