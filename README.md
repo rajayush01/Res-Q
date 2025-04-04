@@ -1,1 +1,1 @@
-# Res-Q
+# RESQ
