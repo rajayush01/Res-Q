@@ -77,15 +77,15 @@ const Landing = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setFadeOut(false);
-      }, 1000);
+        setFadeOut(true);
+        setTimeout(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+            setFadeOut(false);
+        }, 1000);
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, []);
+}, [images.length]); // Add images.length as dependency
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
