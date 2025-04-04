@@ -9,16 +9,12 @@ import {
   CloudRain,
   Flame,
   Globe,
-  LogIn,
-  UserPlus
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import NavSurvival from '../../components/Navbar/NavSurvival';
 
 
 const Survival = () => {
-  const navigate = useNavigate();
 
   const guides = [
     {
