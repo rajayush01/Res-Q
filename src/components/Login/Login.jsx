@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -28,16 +28,16 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLoginSuccess = (credentialResponse) => {
-    console.log("Google Login Success:", credentialResponse);
-    // Decide dashboard routing based on additional info from Google login
-    // For now, defaulting to individual dashboard
-    navigate('/DashboardIndividual');
-  };
+  // const handleGoogleLoginSuccess = (credentialResponse) => {
+  //   console.log("Google Login Success:", credentialResponse);
+  //   // Decide dashboard routing based on additional info from Google login
+  //   // For now, defaulting to individual dashboard
+  //   navigate('/DashboardIndividual');
+  // };
 
-  const handleGoogleLoginError = () => {
-    console.error("Google Login Failed");
-  };
+  // const handleGoogleLoginError = () => {
+  //   console.error("Google Login Failed");
+  // };
 
   const isFormValid = formData.email && formData.password && formData.userType;
 
