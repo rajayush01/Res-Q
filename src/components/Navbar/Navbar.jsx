@@ -19,16 +19,16 @@ const Navbar = () => {
           />
         </div>
         
-        <div className='text-white flex flex-row justify-between gap-4 mt-12 items-center'>
+        <div className='text-black flex flex-row justify-between gap-4 mt-12 items-center'>
           <button 
             onClick={() => navigate('/signup')}
-            className='border-2 border-white/60 bg-transparent hover:bg-blue-500/30 hover:scale-95 px-6 py-2 rounded-lg cursor-pointer transition-all duration-300 text-sm font-medium hover:border-white'
+            className='border-2 border-black/60 bg-transparent hover:bg-blue-500/30 hover:scale-95 px-6 py-2 rounded-lg cursor-pointer transition-all duration-300 text-sm font-medium hover:border-black'
           >
             Sign Up
           </button>
           <button 
             onClick={() => navigate('/login')}
-            className='border-2 border-white bg-white/10 hover:bg-blue-500/30 hover:scale-95 px-6 py-2 rounded-lg cursor-pointer transition-all duration-300 text-sm font-medium'
+            className='border-2 border-black/60 bg-white/10 hover:bg-blue-500/30 hover:scale-95 px-6 py-2 rounded-lg cursor-pointer transition-all duration-300 text-sm font-medium'
           >
             Login
           </button>
