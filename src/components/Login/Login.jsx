@@ -1,18 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import bg from "../../assets/avalanche.jpeg";
-import bg9 from "../../assets/cyclone-2.jpg";
-import bg6 from "../../assets/volcano.jpg";
-import bg3 from "../../assets/cyclone-4.jpg";
-import bg4 from "../../assets/cyclone.jpg";
-import bg5 from "../../assets/earthquake.jpg";
-import bg2 from "../../assets/flood.jpg";
-import bg7 from "../../assets/landslides.jpg";
-import bg8 from "../../assets/thunderstorm.jpg";
-import bg1 from "../../assets/wildfire.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,22 +11,6 @@ const Login = () => {
     password: "",
     userType: "",
   });
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
-
-  const images = [bg, bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9];
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setFadeOut(false);
-      }, 1000);
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, [images.length]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,26 +44,63 @@ const Login = () => {
   return (
     <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
       <div className="relative min-h-screen overflow-hidden">
-        {/* Background Image with Smooth Transition */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <img
-            src={images[currentImageIndex]}
-            alt="Disaster Response Scenarios"
-            className={`w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-              fadeOut ? "opacity-0" : "opacity-70"
-            }`}
+        {/* Aesthetic Gradient Background */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100"></div>
+          <div className="absolute inset-0 bg-gradient-to-tl from-blue-100/60 via-transparent to-sky-100/60"></div>
+          
+          {/* Floating Geometric Shapes */}
+          <motion.div
+            className="absolute top-32 right-20 w-40 h-40 rounded-full bg-gradient-to-r from-sky-200/40 to-blue-200/40 blur-2xl"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.4, 0.7, 0.4],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/50 to-black opacity-90"></div>
-        </motion.div>
+          <motion.div
+            className="absolute bottom-40 left-20 w-32 h-32 rounded-full bg-gradient-to-r from-indigo-200/50 to-blue-300/50 blur-xl"
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3,
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full bg-gradient-to-r from-slate-200/30 to-blue-200/30 blur-3xl"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+          
+          {/* Animated Lines */}
+          <div className="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="lines" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M 0 30 L 60 30 M 30 0 L 30 60" stroke="#1e40af" strokeWidth="0.5" opacity="0.4"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#lines)" />
+            </svg>
+          </div>
+        </div>
 
         {/* Navbar */}
         <div className="relative z-50">
@@ -97,37 +108,46 @@ const Login = () => {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 h-screen flex items-center justify-center ">
+        <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-20">
           <motion.div
-            className="flex flex-col items-center gap-8 px-4 text-center"
+            className="flex flex-col items-center gap-8 text-center w-full max-w-md"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             {/* Title Section */}
-            <h1 className="text-5xl md:text-6xl font-extrabold text-blue-200 drop-shadow-lg">
-              Welcome Back!
-            </h1>
-            <p className="-mt-5 text-lg md:text-xl text-gray-300">
-              Log in to access your personalized dashboard.
-            </p>
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-slate-700 via-blue-700 to-indigo-700 bg-clip-text text-transparent drop-shadow-lg">
+                Welcome Back!
+              </h1>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+                Log in to access your personalized dashboard.
+              </p>
+            </div>
 
             {/* Login Card */}
             <motion.div
-              className="relative bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl  hover:shadow-white w-full max-w-md transition-transform duration-300 hover:scale-105 -mt-6"
+              className="relative bg-white/80 backdrop-blur-xl border border-blue-200/50 p-8 rounded-3xl shadow-xl w-full"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
+              whileHover={{ y: -5, scale: 1.02 }}
             >
-              <h2 className="text-3xl font-bold text-white mb-6">Login</h2>
-              <form onSubmit={handleSubmit}>
+              {/* Card Glow Effect */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-200/30 via-sky-200/30 to-indigo-200/30 blur-xl -z-10"></div>
+              
+              <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-slate-700 to-blue-700 bg-clip-text text-transparent">
+                Sign In
+              </h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Email Input */}
-                <motion.div className="mb-5" whileHover={{ scale: 1.02 }}>
+                <motion.div className="space-y-2" whileHover={{ scale: 1.02 }}>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-300 mb-2"
+                    className="block text-sm font-semibold text-slate-700 tracking-wide"
                   >
-                    Email
+                    Email Address
                   </label>
                   <motion.input
                     type="email"
@@ -135,16 +155,17 @@ const Login = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 text-gray-800 bg-white/80 rounded-lg border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
-                    whileFocus={{ scale: 1.03 }}
+                    className="w-full px-4 py-3 text-slate-800 bg-white/90 backdrop-blur-sm rounded-xl border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 placeholder-slate-400"
+                    placeholder="Enter your email"
+                    whileFocus={{ scale: 1.02 }}
                   />
                 </motion.div>
 
                 {/* Password Input */}
-                <motion.div className="mb-5" whileHover={{ scale: 1.02 }}>
+                <motion.div className="space-y-2" whileHover={{ scale: 1.02 }}>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-300 mb-2"
+                    className="block text-sm font-semibold text-slate-700 tracking-wide"
                   >
                     Password
                   </label>
@@ -154,16 +175,17 @@ const Login = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 text-gray-800 bg-white/80 rounded-lg border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
-                    whileFocus={{ scale: 1.03 }}
+                    className="w-full px-4 py-3 text-slate-800 bg-white/90 backdrop-blur-sm rounded-xl border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 placeholder-slate-400"
+                    placeholder="Enter your password"
+                    whileFocus={{ scale: 1.02 }}
                   />
                 </motion.div>
 
                 {/* User Type Select */}
-                <motion.div className="mb-6" whileHover={{ scale: 1.02 }}>
+                <motion.div className="space-y-2" whileHover={{ scale: 1.02 }}>
                   <label
                     htmlFor="userType"
-                    className="block text-sm font-medium text-gray-300 mb-2"
+                    className="block text-sm font-semibold text-slate-700 tracking-wide"
                   >
                     Account Type
                   </label>
@@ -172,8 +194,8 @@ const Login = () => {
                     name="userType"
                     value={formData.userType}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 text-gray-800 bg-white/80 rounded-lg border border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
-                    whileFocus={{ scale: 1.03 }}
+                    className="w-full px-4 py-3 text-slate-800 bg-white/90 backdrop-blur-sm rounded-xl border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300"
+                    whileFocus={{ scale: 1.02 }}
                   >
                     <option value="">Select Account Type</option>
                     <option value="individual">Individual User</option>
@@ -184,49 +206,37 @@ const Login = () => {
                 {/* Login Button */}
                 <motion.button
                   type="submit"
-                  className={`w-full py-3 px-4 rounded-lg font-semibold shadow-lg transition-all ${
+                  className={`w-full py-4 px-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 ${
                     isFormValid
-                      ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-indigo-500 hover:to-blue-500"
-                      : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                      ? "bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-indigo-500 hover:to-blue-500 hover:shadow-xl hover:shadow-blue-500/25"
+                      : "bg-slate-300/50 text-slate-500 cursor-not-allowed"
                   }`}
-                  whileHover={isFormValid ? { scale: 1.05 } : {}}
-                  whileTap={isFormValid ? { scale: 0.97 } : {}}
+                  whileHover={isFormValid ? { scale: 1.05, y: -2 } : {}}
+                  whileTap={isFormValid ? { scale: 0.98 } : {}}
                   disabled={!isFormValid}
                 >
-                  Login
+                  Sign In
                 </motion.button>
               </form>
 
-              {/* Google Login Button */}
-              <div className="mt-6 flex justify-center">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full"
-                >
-                  <GoogleLogin
-                    onSuccess={handleGoogleLoginSuccess}
-                    onError={handleGoogleLoginError}
-                    useOneTap
-                    theme="filled_black"
-                    shape="rectangular"
-                    size="large"
-                    text="continue_with"
-                    width="100%"
-                  />
-                </motion.div>
-              </div>
-
               {/* Signup Link */}
-              <p className="text-center text-sm text-gray-400 mt-6">
-                Don't have an account?{" "}
-                <a
+              <div className="mt-8 text-center">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-300"></div>
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-white text-slate-500">Don't have an account?</span>
+                  </div>
+                </div>
+                <motion.a
                   href="/signup"
-                  className="text-indigo-400 hover:text-indigo-300 transition duration-200"
+                  className="inline-block mt-3 text-blue-600 hover:text-blue-700 transition-colors duration-200 font-medium"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  Sign Up
-                </a>
-              </p>
+                  Create account
+                </motion.a>
+              </div>
             </motion.div>
           </motion.div>
         </div>
